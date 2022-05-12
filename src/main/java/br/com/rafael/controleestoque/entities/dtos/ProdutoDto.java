@@ -1,6 +1,5 @@
 package br.com.rafael.controleestoque.entities.dtos;
 
-import br.com.rafael.controleestoque.entities.TipoProduto;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
@@ -19,7 +18,7 @@ public class ProdutoDto implements Serializable {
     private String descricao;
 
     @NotNull
-    private TipoProduto tipo;
+    private Integer tipo;
 
     @NotNull
     private BigDecimal valorCusto;
