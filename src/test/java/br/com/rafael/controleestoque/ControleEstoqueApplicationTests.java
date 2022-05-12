@@ -1,4 +1,4 @@
-package com.example.controleestoque;
+package br.com.rafael.controleestoque;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
