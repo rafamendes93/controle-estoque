@@ -4,7 +4,8 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <include file="changes/01_criacao_tabelas.xml" relativeToChangelogFile="true"/>
-    <include file="changes/02_adicionando_coluna.xml" relativeToChangelogFile="true"/>
+    <include file="changes/01_criacao_tabela_tipo.sql" relativeToChangelogFile="true"/>
+    <include file="changes/02_criacao_tabela_produto.sql" relativeToChangelogFile="true"/>
+    <include file="changes/03_criacao_tabela_movimento.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
