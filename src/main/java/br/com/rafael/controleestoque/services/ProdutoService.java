@@ -33,7 +33,8 @@ public class ProdutoService {
         repo.deleteById(id);
     }
 
-    public ProdutoDto insert(ProdutoDto produtoDto) {
+    public ProdutoDto insert(ProdutoDto produtoDto) throws Exception {
+        produtoDto.setId(null);
         Produto newProduto = repo.save(mapper.toEntity(produtoDto));
         return mapper.toDto(newProduto);
     }
