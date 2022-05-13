@@ -18,7 +18,7 @@ public class ProdutoMapper {
     }
 
 
-    public Produto toEntity(ProdutoDto dto) throws Exception {
+    public Produto toEntity(ProdutoDto dto) {
         return Produto.builder()
                 .id(dto.getId())
                 .descricao(dto.getDescricao())
@@ -36,7 +36,7 @@ public class ProdutoMapper {
                 .build();
     }
 
-    private TipoProduto getTipo(Integer id) throws Exception {
+    private TipoProduto getTipo(Integer id) {
         return tipoProdutoService.findById(id);
     }
 }
