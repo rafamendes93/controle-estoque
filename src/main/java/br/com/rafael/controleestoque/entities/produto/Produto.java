@@ -1,5 +1,6 @@
-package br.com.rafael.controleestoque.entities;
+package br.com.rafael.controleestoque.entities.produto;
 
+import br.com.rafael.controleestoque.entities.tipoproduto.TipoProduto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -16,7 +17,15 @@ import java.math.BigDecimal;
 public class Produto implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "sequence_id_produtos"
+    )
+    @SequenceGenerator(
+            name = "sequence_id_produtos",
+            sequenceName = "sequence_produto",
+            allocationSize = 1
+    )
     private Integer id;
 
     @NotNull

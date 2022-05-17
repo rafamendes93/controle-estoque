@@ -1,4 +1,4 @@
-package br.com.rafael.controleestoque.entities.enums;
+package br.com.rafael.controleestoque.entities.movimentoestoque;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

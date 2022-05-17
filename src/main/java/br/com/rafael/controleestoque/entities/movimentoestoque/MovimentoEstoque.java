@@ -1,6 +1,6 @@
-package br.com.rafael.controleestoque.entities;
+package br.com.rafael.controleestoque.entities.movimentoestoque;
 
-import br.com.rafael.controleestoque.entities.enums.TipoMovimento;
+import br.com.rafael.controleestoque.entities.produto.Produto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,7 +17,15 @@ import java.time.LocalDate;
 public class MovimentoEstoque implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "sequence_id_movimento_estoque"
+    )
+    @SequenceGenerator(
+            name = "sequence_id_movimento_estoque",
+            sequenceName = "sequence_movimento_estoque",
+            allocationSize = 1
+    )
     private Integer id;
 
     @Enumerated(EnumType.STRING)
