@@ -18,3 +18,5 @@ VALUES (2, 'Eletrodomêstico');
 INSERT INTO tipo_produto (id, descricao)
 VALUES (3, 'Móvel');
 --rollback drop table tipo_produto;
+
+CREATE SEQUENCE sequence_tipo_produto START 4;

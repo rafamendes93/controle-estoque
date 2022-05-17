@@ -25,4 +25,6 @@ VALUES (3, 'Sofá', 1200.00, 3);
 INSERT INTO produto (id, descricao, valor_custo, tipo_id)
 VALUES (4, 'Smartphone', 1150.00, 1);
 
+CREATE SEQUENCE sequence_produto START 5;
+
 --rollback drop table produto;

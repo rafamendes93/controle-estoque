@@ -31,4 +31,5 @@ VALUES (5, 'E', null, null, 3, 4);
 INSERT INTO movimento_estoque (id, tipo_movimento, valor_venda, data_venda, quantidade, produto_id)
 VALUES (6, 'S', 1600.00, '2022-05-12', 1, 4);
 
+CREATE SEQUENCE sequence_movimento_estoque START 7;
 --rollback drop table movimento_estoque;
