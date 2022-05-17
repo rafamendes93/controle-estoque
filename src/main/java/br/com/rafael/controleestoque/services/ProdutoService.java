@@ -1,52 +1,41 @@
 package br.com.rafael.controleestoque.services;
 
-import br.com.rafael.controleestoque.entities.Produto;
-import br.com.rafael.controleestoque.entities.dtos.ProdutoDto;
-import br.com.rafael.controleestoque.exceptions.NotFoundException;
-import br.com.rafael.controleestoque.mappers.ProdutoMapper;
-import br.com.rafael.controleestoque.messages.MessagesHandler;
+import br.com.rafael.controleestoque.entities.produto.Produto;
+import br.com.rafael.controleestoque.exceptions.NaoEncontradoException;
+import br.com.rafael.controleestoque.exceptions.ProdutoComMovimentoException;
 import br.com.rafael.controleestoque.repositories.ProdutoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ProdutoService {
+public class ProdutoService extends BaseService<ProdutoRepository> implements IService<Produto, Integer> {
 
-    private final ProdutoRepository repo;
-    private final ProdutoMapper mapper;
-    private final MessagesHandler messagesHandler;
-
-    @Autowired
-    public ProdutoService(ProdutoRepository repo,
-                          ProdutoMapper mapper,
-                          MessagesHandler messagesHandler) {
-        this.repo = repo;
-        this.mapper = mapper;
-        this.messagesHandler = messagesHandler;
-    }
-
-    private Produto findById(Integer id) {
+    public Produto findById(Integer id) {
         return repo.findById(id)
-                .orElseThrow(() -> new NotFoundException(messagesHandler.getMessage("produto.notfound", id)));
+                .orElseThrow(() -> new NaoEncontradoException(messagesHandler.getMessage("produto.notfound", id)));
     }
 
-    public ProdutoDto find(Integer id) {
-        return mapper.toDto(findById(id));
+    public Page<Produto> findByTipo(Integer tipoId, Pageable pageable) {
+        return repo.findByTipoId(tipoId, pageable);
     }
 
     public void deleteById(Integer id) {
-        repo.deleteById(id);
+        try {
+            repo.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new ProdutoComMovimentoException(messagesHandler.getMessage("produto.com_movimento", id));
+        }
     }
 
-    public ProdutoDto insert(ProdutoDto produtoDto) {
-        produtoDto.setId(null);
-        Produto newProduto = repo.save(mapper.toEntity(produtoDto));
-        return mapper.toDto(newProduto);
+    public Produto insert(Produto produto) {
+        produto.setId(null);
+        return repo.save(produto);
     }
 
-    public ProdutoDto update(Integer id, ProdutoDto produtoDto) {
-        Produto produto = findById(id);
-        produtoDto.setId(produto.getId());
-        return insert(produtoDto);
+    public Produto update(Integer id, Produto produto) {
+        produto.setId(findById(id).getId());
+        return repo.save(produto);
     }
 }
