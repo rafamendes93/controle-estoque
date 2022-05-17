@@ -21,4 +21,8 @@ public class MessagesHandler {
         return messageSource.getMessage(message, Arrays.stream(parameters).toArray(), Locale.getDefault());
     }
 
+    public String getMessage(String message) {
+        return messageSource.getMessage(message, null, Locale.getDefault());
+    }
+
 }
