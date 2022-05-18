@@ -2,6 +2,7 @@ package br.com.rafael.controleestoque.entities.movimentoestoque;
 
 import lombok.*;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -24,6 +25,7 @@ public class MovimentoEstoqueDto implements Serializable {
     private LocalDate dataVenda;
 
     @NotNull(message = "${movimento.quantidade.isnull}")
+    @Min(value = 1, message = "${movimento.quantidade.maior}")
     private Integer quantidade;
 
     @NotNull(message = "${movimento.produto.isnull}")

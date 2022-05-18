@@ -31,7 +31,7 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
                 new HttpHeaders(), NOT_FOUND, request);
     }
 
-    @ExceptionHandler(value = {EstoqueInsuficienteException.class, ProdutoComMovimentoException.class, IllegalArgumentException.class})
+    @ExceptionHandler(value = {EstoqueInsuficienteException.class, RegistrosDependentesException.class, IllegalArgumentException.class})
     protected ResponseEntity<Object> handleEstoqueInsuficiente(RuntimeException ex, WebRequest request) {
         ErrorResponse error = ErrorResponse.builder()
                 .errorMessage(BAD_REQUEST.getReasonPhrase())
