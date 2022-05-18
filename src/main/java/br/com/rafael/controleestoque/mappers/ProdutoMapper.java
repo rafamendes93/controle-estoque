@@ -22,7 +22,7 @@ public class ProdutoMapper implements Mapper<Produto, ProdutoDto> {
         this.movimentoEstoqueService = movimentoEstoqueService;
     }
 
-    public Produto toEntity(ProdutoDto dto) {
+    public Produto toEntity(ProdutoDto dto) throws Throwable {
         return Produto.builder()
                 .id(dto.getId())
                 .descricao(dto.getDescricao())
@@ -52,7 +52,7 @@ public class ProdutoMapper implements Mapper<Produto, ProdutoDto> {
         return movimentoEstoqueService.getQuantidadeByProduto(produtoId);
     }
 
-    private TipoProduto getTipo(Integer id) {
+    private TipoProduto getTipo(Integer id) throws Throwable {
         return tipoProdutoService.findById(id);
     }
 }
