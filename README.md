@@ -34,4 +34,15 @@ Endpoints utilizados no projeto, datalhes nas coleções que estão na pasta "po
 | DEL    | /tipo-produto      |                     |                     | Deletar tipo produto                            |
 | POST   | /movimento         | MovimentoEstoqueDto | MovimentoEstoqueDto | Inserir movimento do estoque (entrada ou saída) |
 
+### Build
 
+> ***./mvnw spring-boot:run***
+> > Profile com banco H2
+
+> ***./mvnw spring-boot:run -Dspring-boot.run.profiles=postgres***
+> > Profile com banco postgres
+
+### Tests
+
+> ***mvn test***
+> > 82% coverage
