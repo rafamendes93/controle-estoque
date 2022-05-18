@@ -40,6 +40,7 @@ public class ProdutoFactory {
                 .id(1)
                 .descricao("Produto teste")
                 .tipo(TipoProduto.builder()
+                        .id(1)
                         .descricao("Tipo Teste")
                         .build())
                 .valorCusto(BigDecimal.valueOf(1500.00))

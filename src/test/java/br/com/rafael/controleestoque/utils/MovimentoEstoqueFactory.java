@@ -29,7 +29,6 @@ public class MovimentoEstoqueFactory {
         return build;
     }
 
-
     public static MovimentoEstoqueDto buildDto() {
         return MovimentoEstoqueDto.builder()
                 .id(1)
@@ -38,6 +37,15 @@ public class MovimentoEstoqueFactory {
                 .dataVenda(LocalDate.now())
                 .tipoMovimento(TipoMovimento.E)
                 .quantidade(10)
+                .build();
+    }
+
+    public static TotalizadorMovimentosDto buildTotalizador() {
+        return TotalizadorMovimentosDto.builder()
+                .lucro(BigDecimal.valueOf(1500.00))
+                .quantidadeEntrada(10L)
+                .quantidadeSaida(5L)
+                .quantidadeEstoque(5L)
                 .build();
     }
 }
