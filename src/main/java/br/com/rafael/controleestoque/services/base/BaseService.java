@@ -1,4 +1,4 @@
-package br.com.rafael.controleestoque.services;
+package br.com.rafael.controleestoque.services.base;
 
 import br.com.rafael.controleestoque.messages.MessagesHandler;
 import lombok.extern.slf4j.Slf4j;

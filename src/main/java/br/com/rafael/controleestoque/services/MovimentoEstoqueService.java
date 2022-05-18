@@ -2,9 +2,8 @@ package br.com.rafael.controleestoque.services;
 
 import br.com.rafael.controleestoque.entities.movimentoestoque.*;
 import br.com.rafael.controleestoque.exceptions.EstoqueInsuficienteException;
-import br.com.rafael.controleestoque.mappers.MovimentoEstoqueMapper;
 import br.com.rafael.controleestoque.repositories.MovimentoEstoqueRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import br.com.rafael.controleestoque.services.base.BaseService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -14,9 +13,6 @@ import static java.util.Objects.isNull;
 
 @Service
 public class MovimentoEstoqueService extends BaseService<MovimentoEstoqueRepository> {
-
-    @Autowired
-    private MovimentoEstoqueMapper mapper;
 
     public TotalizadorMovimentosDto getQuantidadeByProduto(Integer produtoId) {
         MovimentoEstoqueProjection total = repo.findTotalLucroByProduto(produtoId);
@@ -34,13 +30,11 @@ public class MovimentoEstoqueService extends BaseService<MovimentoEstoqueReposit
                 (isNull(total.getTotalSaida()) ? 0 : total.getTotalSaida());
     }
 
-    public MovimentoEstoqueDto criarMovimento(MovimentoEstoqueDto movimentoDto) {
-        movimentoDto.setId(null);
-        MovimentoEstoque movimentoEstoque = mapper.toEntity(movimentoDto);
-        movimentoEstoque = movimentoEstoque.getTipoMovimento() == TipoMovimento.E ?
-                criarMovimentoEntrada(movimentoEstoque) :
-                criarMovimentoSaida(movimentoEstoque);
-        return mapper.toDto(movimentoEstoque);
+    public MovimentoEstoque criarMovimento(MovimentoEstoque movimento) {
+        movimento.setId(null);
+        return movimento.getTipoMovimento() == TipoMovimento.E ?
+                criarMovimentoEntrada(movimento) :
+                criarMovimentoSaida(movimento);
     }
 
     private MovimentoEstoque criarMovimentoSaida(MovimentoEstoque movimento) {
@@ -56,7 +50,7 @@ public class MovimentoEstoqueService extends BaseService<MovimentoEstoqueReposit
             throw new EstoqueInsuficienteException(messagesHandler.getMessage("movimento.estoque.insuficiente"));
     }
 
-    public MovimentoEstoque criarMovimentoEntrada(MovimentoEstoque movimento) {
+    private MovimentoEstoque criarMovimentoEntrada(MovimentoEstoque movimento) {
         return repo.save(movimento);
     }
 }
