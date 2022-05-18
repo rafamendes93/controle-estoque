@@ -1,0 +1,289 @@
+{
+  "info": {
+    "_postman_id": "57b6b76a-4f2e-40e8-aff0-64292c02f668",
+    "name": "Controle de estoque",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "produto",
+      "item": [
+        {
+          "name": "buscar produto 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:8080/produto/1"
+          },
+          "response": []
+        },
+        {
+          "name": "buscar produto inexistente",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:8080/produto/99999"
+          },
+          "response": []
+        },
+        {
+          "name": "deletar",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "http://localhost:8080/produto/3"
+          },
+          "response": []
+        },
+        {
+          "name": "deletar produto com movimento",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "http://localhost:8080/produto/1"
+          },
+          "response": []
+        },
+        {
+          "name": "inserir",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"descricao\": \"Cadeira de escritório\",\n    \"tipo\": {\n        \"id\": 3\n    },\n    \"valorCusto\": \"690.50\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:8080/produto"
+          },
+          "response": []
+        },
+        {
+          "name": "inserir com erro sem valor de custo",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"descricao\": \"Cadeira de escritório\",\n    \"tipo\": {\n        \"id\": 3\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:8080/produto"
+          },
+          "response": []
+        },
+        {
+          "name": "buscar por tipo",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/produto/tipo/1?page=0&size=10",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "produto",
+                "tipo",
+                "1"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "atualizar produto",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": 1,\n    \"descricao\": \"Notebook SUPER MASSA\",\n    \"tipo\": {\n        \"id\": 1,\n        \"descricao\": \"Eletrônico\"\n    },\n    \"valorCusto\": 2000.00\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:8080/produto"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "estoque",
+      "item": [
+        {
+          "name": "saída com estoque insuficiente",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"produtoId\": \"1\",\n    \"tipoMovimento\" : \"S\",\n    \"dataVenda\": \"2022-04-10\",\n    \"valorVenda\": 2800.00,\n    \"quantidade\": 999999\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:8080/movimento"
+          },
+          "response": []
+        },
+        {
+          "name": "saída de estoque sem valor de venda",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"produtoId\": \"1\",\n    \"tipoMovimento\" : \"S\",\n    \"dataVenda\": \"2022-04-10\",\n    \"quantidade\": 999999\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:8080/movimento"
+          },
+          "response": []
+        },
+        {
+          "name": "saída de estoque sem data venda",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"produtoId\": \"1\",\n    \"tipoMovimento\" : \"S\",\n    \"valorVenda\": 2800.00,\n    \"quantidade\": 999999\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:8080/movimento"
+          },
+          "response": []
+        },
+        {
+          "name": "entrada de estoque",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"produtoId\": \"1\",\n    \"tipoMovimento\" : \"E\",\n    \"quantidade\": 10\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:8080/movimento"
+          },
+          "response": []
+        },
+        {
+          "name": "saída de estoque",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"produtoId\": \"1\",\n    \"tipoMovimento\" : \"S\",\n    \"dataVenda\": \"2022-04-10\",\n    \"valorVenda\": 2800.00,\n    \"quantidade\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:8080/movimento"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "tipo produto",
+      "item": [
+        {
+          "name": "buscar tipo produto",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:8080/tipo-produto/3"
+          },
+          "response": []
+        },
+        {
+          "name": "inserir tipo produto",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"descricao\" : \"Tipo produto teste\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:8080/tipo-produto"
+          },
+          "response": []
+        },
+        {
+          "name": "deletar tipo produto",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "http://localhost:8080/tipo-produto/1"
+          },
+          "response": []
+        },
+        {
+          "name": "alterar tipo produto",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": 3,\n    \"descricao\": \"Móvel para casa\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:8080/tipo-produto"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
